@@ -1,0 +1,12 @@
+@import url("./assets/styles/reset.css");
+
+:root {
+  --black-color: #141414;
+  --black-color-2: #1f1f1f;
+  --black-color-3: #262626;
+  --white-color: #f9f9f9;
+  --blue-color: #4f92f7;
+  --green-color: #30b94d;
+  --gray-color: #686868;
+  --gray-color-30: rgba(227, 227, 227, 0.3);
+}
