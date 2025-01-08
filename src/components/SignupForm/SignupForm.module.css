@@ -1,0 +1,121 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: calc(8 / 16 * 1rem);
+}
+label {
+  position: absolute;
+  top: 16px;
+  left: 14px;
+  font-size: calc(12 / 16 * 1rem);
+  color: var(--black-color-104);
+}
+.container {
+  position: relative;
+}
+.field {
+  padding: calc(14 / 16 * 1rem);
+  border-radius: 12px;
+  background-color: var(--black-color-38);
+  color: var(--color-white);
+  font-size: calc(12 / 16 * 1rem);
+  border: 1px;
+  outline: none;
+  width: 100%;
+}
+.name {
+  padding-left: calc(59 / 16 * 1rem);
+}
+.mail {
+  padding-left: calc(49 / 16 * 1rem);
+}
+.password {
+  padding-left: calc(78 / 16 * 1rem);
+}
+.field::placeholder {
+  color: var(--white-color);
+}
+.btns {
+  margin-top: calc(20 / 16 * 1rem);
+  display: flex;
+  gap: calc(14 / 16 * 1rem);
+}
+.registration {
+  font-size: calc(14 / 16 * 1rem);
+  color: var(--black-color-31);
+  padding: calc(12 / 16 * 1rem) calc(29 / 16 * 1rem);
+  background-color: var(--white-color);
+  border-radius: 30px;
+  font-weight: 700;
+  border: 1px solid;
+  transition: background-color 0.4s ease, color 0.4s ease,
+    border-color 0.4s ease;
+}
+.registration:hover,
+.registration:focus {
+  background-color: var(--black-color-31);
+  color: var(--white-color);
+  border-color: var(--white-color);
+}
+.login {
+  font-size: calc(12 / 16 * 1rem);
+  color: var(--black-color-104);
+  text-decoration: underline;
+  transition: color 0.4s ease;
+}
+.login:hover,
+.login:focus {
+  color: var(--white-color);
+}
+.container {
+  position: relative;
+}
+.btn_icon {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+}
+.error {
+  color: rgba(233, 5, 22, 1);
+  font-size: calc(12 / 16 * 1rem);
+}
+.field.errorField {
+  outline: 1px solid rgba(233, 5, 22, 1);
+}
+.validField {
+  outline: 1px solid rgba(48, 185, 77, 1);
+}
+
+@media (min-width: 768px) {
+  .field {
+    font-size: calc(14 / 16 * 1rem);
+  }
+  .form {
+    row-gap: calc(14 / 16 * 1rem);
+  }
+  .btns {
+    margin-top: calc(82 / 16 * 1rem);
+    gap: calc(20 / 16 * 1rem);
+  }
+  .registration {
+    font-size: calc(20 / 16 * 1rem);
+    padding: calc(16 / 16 * 1rem) calc(54 / 16 * 1rem);
+  }
+  .login {
+    font-size: calc(14 / 16 * 1rem);
+  }
+  label {
+    top: 16px;
+    left: 14px;
+    font-size: calc(14 / 16 * 1rem);
+  }
+  .name {
+    padding-left: calc(65 / 16 * 1rem);
+  }
+  .mail {
+    padding-left: calc(53 / 16 * 1rem);
+  }
+  .password {
+    padding-left: calc(86 / 16 * 1rem);
+  }
+}

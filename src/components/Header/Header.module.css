@@ -1,0 +1,23 @@
+.container {
+  padding: calc(20 / 16 * 1rem);
+}
+
+.logo img {
+  height: 17px;
+}
+.logo span {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .logo span {
+    display: block;
+    font-size: calc(18 / 16 * 1rem);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}

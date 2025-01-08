@@ -1,0 +1,4 @@
+.container {
+  background-color: var(--black-color-31);
+  border-radius: calc(30 / 16 * 1rem);
+}
