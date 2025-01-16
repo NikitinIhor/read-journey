@@ -1,7 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import sprite from "../../assets/icons/sprite.svg";
+import { signin } from "../../redux/auth/ops";
+import { selectIsLoggedIn, selectLoading } from "../../redux/auth/slice";
+import { AppDispatch } from "../../redux/store";
+import Loader from "../Loader/Loader";
 import css from "../SignupForm/SignupForm.module.css";
 
 interface SignInFormProps {
@@ -9,26 +15,44 @@ interface SignInFormProps {
   handleChangeForm: () => void;
 }
 
-const initialValues = {
-  mail: "",
+interface SigninFormValues {
+  email: string;
+  password: string;
+}
+
+const initialValues: SigninFormValues = {
+  email: "",
   password: "",
 };
 
 const FeedbackSchema = Yup.object().shape({
-  mail: Yup.string().email("Enter a valid email").required(),
-  password: Yup.string().min(7, "Too short").max(256, "Too long").required(),
+  email: Yup.string().email("Enter a valid email").required(),
+  password: Yup.string().min(6, "Too short").max(256, "Too long").required(),
 });
-
-const handleSubmit = (values: { mail: string; password: string }) => {
-  console.log(values);
-};
 
 const SignInForm: React.FC<SignInFormProps> = ({ login, handleChangeForm }) => {
   const [showIcon, setShowIcon] = useState(false);
 
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoggodIn = useSelector(selectIsLoggedIn);
+  const loading = useSelector(selectLoading);
+
+  useEffect(() => {
+    if (isLoggodIn) {
+      navigate("/recommended");
+    }
+  }, [isLoggodIn, navigate]);
+
   const handleShowIcon = () => {
     setShowIcon((prev) => !prev);
   };
+
+  const handleSubmit = (values: SigninFormValues) => {
+    dispatch(signin(values));
+  };
+
+  if (loading) return <Loader />;
 
   return (
     <Formik
@@ -42,17 +66,17 @@ const SignInForm: React.FC<SignInFormProps> = ({ login, handleChangeForm }) => {
             <label htmlFor="mail">Mail:</label>
             <Field
               className={`${css.field} ${css.mail} ${
-                errors.mail && touched.mail
+                errors.email && touched.email
                   ? css.errorField
-                  : touched.mail && !errors.mail
+                  : touched.email && !errors.email
                   ? css.validField
                   : ""
               }`}
               type="email"
-              name="mail"
+              name="email"
               placeholder="Your@email.com"
             />
-            <ErrorMessage className={css.error} name="mail" component="span" />
+            <ErrorMessage className={css.error} name="email" component="span" />
           </div>
 
           <div className={css.container}>

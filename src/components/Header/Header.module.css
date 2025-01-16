@@ -55,6 +55,7 @@
   height: 100%;
   background: rgba(20, 20, 20, 0.6);
 }
+
 .burger_body {
   position: absolute;
   top: 0;
@@ -70,6 +71,7 @@
   padding-top: calc(40 / 16 * 1rem);
   padding-bottom: calc(40 / 16 * 1rem);
 }
+
 .burger_close {
   margin-left: calc(80 / 16 * 1rem);
 }
