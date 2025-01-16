@@ -48,7 +48,7 @@ export const signin = createAsyncThunk(
 
 export const signout = createAsyncThunk("auth/signout", async (_, thunkApi) => {
   try {
-    const res = await axios.post("/users/signout");
+    await axios.post("/users/signout");
     setAuthHeader("");
   } catch (error) {
     const err = error as AxiosError;
