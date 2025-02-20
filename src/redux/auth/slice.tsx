@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
 import { store } from "../store";
 import { refresh, signin, signout, signup } from "./ops";
 
@@ -8,7 +7,6 @@ export type RootState = ReturnType<typeof store.getState>;
 interface User {
   name: string;
   email: string;
-  password: string;
 }
 
 interface AuthState {
@@ -17,6 +15,7 @@ interface AuthState {
   error: boolean;
   token: string | null;
   isLoggedIn: boolean;
+  isRefreshing: boolean;
 }
 
 const initialState: AuthState = {
@@ -25,6 +24,7 @@ const initialState: AuthState = {
   error: false,
   token: null,
   isLoggedIn: false,
+  isRefreshing: false,
 };
 
 const authSlice = createSlice({
@@ -48,25 +48,14 @@ const authSlice = createSlice({
           state.user = {
             name: action.payload.name,
             email: action.payload.email,
-            password: "",
           };
           state.token = action.payload.token;
           state.isLoggedIn = true;
         }
       )
-      .addCase(signup.rejected, (state, action) => {
+      .addCase(signup.rejected, (state) => {
         state.loading = false;
         state.error = true;
-
-        if (action.error.message?.includes("409")) {
-          toast.error("Such email already exists.");
-        } else if (action.error.message?.includes("400")) {
-          toast.error("Bad request (invalid request body).");
-        } else if (action.error.message?.includes("500")) {
-          toast.error("Server error. Please try again later.");
-        } else {
-          toast.error("An unknown error occurred.");
-        }
       })
       .addCase(signin.pending, (state) => {
         state.loading = true;
@@ -83,25 +72,14 @@ const authSlice = createSlice({
           state.user = {
             name: action.payload.name,
             email: action.payload.email,
-            password: "",
           };
           state.token = action.payload.token;
           state.isLoggedIn = true;
         }
       )
-      .addCase(signin.rejected, (state, action) => {
+      .addCase(signin.rejected, (state) => {
         state.loading = false;
         state.error = true;
-
-        if (action.error.message?.includes("401")) {
-          toast.error("Email or password invalid.");
-        } else if (action.error.message?.includes("400")) {
-          toast.error("Bad request (invalid request body).");
-        } else if (action.error.message?.includes("500")) {
-          toast.error("Server error. Please try again later.");
-        } else {
-          toast.error("An unknown error occurred.");
-        }
       })
       .addCase(signout.pending, (state) => {
         state.loading = true;
@@ -114,45 +92,33 @@ const authSlice = createSlice({
         state.user = null;
         state.isLoggedIn = false;
       })
-      .addCase(signout.rejected, (state, action) => {
+      .addCase(signout.rejected, (state) => {
         state.loading = false;
         state.error = true;
-
-        if (action.error.message?.includes("401")) {
-          toast.error("Unauthorized.");
-        } else if (action.error.message?.includes("500")) {
-          toast.error("Server error. Please try again later.");
-        } else {
-          toast.error("An unknown error occurred.");
-        }
       })
       .addCase(refresh.pending, (state) => {
         state.loading = true;
         state.error = false;
+        state.isRefreshing = true;
       })
       .addCase(
         refresh.fulfilled,
-        (state, action: PayloadAction<{ user: User }>) => {
+        (state, action: PayloadAction<{ user: User; token: string }>) => {
           state.loading = false;
           state.error = false;
           state.isLoggedIn = true;
+          state.isRefreshing = false;
           state.user = action.payload.user;
+          state.token = action.payload.token;
         }
       )
-      .addCase(refresh.rejected, (state, action) => {
+      .addCase(refresh.rejected, (state) => {
         state.loading = false;
         state.error = true;
         state.isLoggedIn = false;
+        state.isRefreshing = false;
         state.token = null;
         state.user = null;
-
-        if (action.error.message?.includes("401")) {
-          toast.error("Unauthorized. Please login again.");
-        } else if (action.error.message?.includes("500")) {
-          toast.error("Server error. Please try again later.");
-        } else {
-          toast.error("An unknown error occurred.");
-        }
       });
   },
 });
@@ -161,5 +127,6 @@ export const selectLoading = (state: RootState) => state.auth.loading;
 export const selectError = (state: RootState) => state.auth.error;
 export const selectUser = (state: RootState) => state.auth.user;
 export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectIsRefreshing = (state: RootState) => state.auth.isRefreshing;
 
 export default authSlice.reducer;

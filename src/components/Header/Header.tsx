@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import sprite from "../../assets/icons/sprite.svg";
 import logo from "../../assets/images/Logo.png";
 import { signout } from "../../redux/auth/ops";
@@ -17,7 +17,6 @@ const Header: React.FC<HeaderProps> = () => {
   const [signingOut, setSigningOut] = useState(false);
 
   const dispatch: AppDispatch = useDispatch();
-  const navigate = useNavigate();
   const loading = useSelector(selectLoading);
   const user = useSelector(selectUser);
 
@@ -31,7 +30,6 @@ const Header: React.FC<HeaderProps> = () => {
     setSigningOut(true);
     await dispatch(signout());
     setSigningOut(false);
-    navigate("/");
   };
 
   return (

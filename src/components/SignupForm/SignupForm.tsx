@@ -1,11 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import sprite from "../../assets/icons/sprite.svg";
 import { signup } from "../../redux/auth/ops";
-import { selectIsLoggedIn, selectLoading } from "../../redux/auth/slice";
+import { selectLoading } from "../../redux/auth/slice";
 import { AppDispatch } from "../../redux/store";
 import Loader from "../Loader/Loader";
 import css from "./SignupForm.module.css";
@@ -37,15 +36,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ login, handleChangeForm }) => {
   const [showIcon, setShowIcon] = useState(false);
 
   const dispatch: AppDispatch = useDispatch();
-  const navigate = useNavigate();
-  const isLoggodIn = useSelector(selectIsLoggedIn);
   const loading = useSelector(selectLoading);
-
-  useEffect(() => {
-    if (isLoggodIn) {
-      navigate("/recommended");
-    }
-  }, [isLoggodIn, navigate]);
 
   const handleShowIcon = () => {
     setShowIcon((prev) => !prev);

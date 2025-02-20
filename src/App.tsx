@@ -1,9 +1,11 @@
 import { lazy, Suspense, useEffect } from "react";
-import { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader/Loader";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { RestrictedRoute } from "./components/RestrictedRoute";
 import { refresh } from "./redux/auth/ops";
+import { selectIsRefreshing } from "./redux/auth/slice";
 import { AppDispatch } from "./redux/store";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
@@ -15,19 +17,39 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(refresh());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <>
-      <Toaster />
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/recommended" element={<RecommendedPage />} />
-          <Route path="/library" element={<LibraryPage />} />
+          <Route
+            path="/"
+            element={
+              <RestrictedRoute
+                component={<WelcomePage />}
+                redirectTo="/recommended"
+              />
+            }
+          />
+          <Route
+            path="/recommended"
+            element={
+              <PrivateRoute component={<RecommendedPage />} redirectTo="/" />
+            }
+          />
+          <Route
+            path="/library"
+            element={
+              <PrivateRoute component={<LibraryPage />} redirectTo="/" />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
