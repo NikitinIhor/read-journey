@@ -63,7 +63,7 @@ export const refresh = createAsyncThunk(
     const persistedtToken = state.auth.token;
     try {
       setAuthHeader(persistedtToken);
-      const res = await axios.get("/users/current/refresh");
+      const res = await axios.get("/users/current");
       return res.data;
     } catch (error) {
       const err = error as AxiosError;

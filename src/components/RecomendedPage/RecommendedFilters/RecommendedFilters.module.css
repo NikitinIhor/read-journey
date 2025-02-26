@@ -1,0 +1,33 @@
+.title {
+  font-size: calc(10 / 16 * 1rem);
+  margin-bottom: calc(8 / 16 * 1rem);
+}
+.filter {
+  padding: calc(14 / 16 * 1rem);
+  background-color: var(--black-color-38);
+  border-radius: 12px;
+}
+.filter:not(:last-child) {
+  margin-bottom: calc(8 / 16 * 1rem);
+}
+label {
+  font-size: calc(12 / 16 * 1rem);
+  color: rgba(104, 104, 104, 1);
+}
+input {
+  padding-left: calc(10 / 16 * 1rem);
+  background-color: transparent;
+  border: none;
+  color: rgba(249, 249, 249, 1);
+}
+input::placeholder {
+  color: rgba(249, 249, 249, 1);
+}
+.btn {
+  padding: calc(10 / 16 * 1rem) calc(20 / 16 * 1rem);
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  border-radius: 30px;
+  font-weight: 700;
+  color: white;
+  margin-top: calc(20 / 16 * 1rem);
+}

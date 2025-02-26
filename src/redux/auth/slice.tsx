@@ -103,12 +103,18 @@ const authSlice = createSlice({
       })
       .addCase(
         refresh.fulfilled,
-        (state, action: PayloadAction<{ user: User; token: string }>) => {
+        (
+          state,
+          action: PayloadAction<{ name: string; email: string; token: string }>
+        ) => {
           state.loading = false;
           state.error = false;
           state.isLoggedIn = true;
           state.isRefreshing = false;
-          state.user = action.payload.user;
+          state.user = {
+            name: action.payload.name,
+            email: action.payload.email,
+          };
           state.token = action.payload.token;
         }
       )
