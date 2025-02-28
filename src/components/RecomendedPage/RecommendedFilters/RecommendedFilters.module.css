@@ -3,6 +3,7 @@
   margin-bottom: calc(8 / 16 * 1rem);
 }
 .filter {
+  position: relative;
   padding: calc(14 / 16 * 1rem);
   background-color: var(--black-color-38);
   border-radius: 12px;
@@ -11,13 +12,17 @@
   margin-bottom: calc(8 / 16 * 1rem);
 }
 label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
   font-size: calc(12 / 16 * 1rem);
   color: rgba(104, 104, 104, 1);
 }
 input {
-  padding-left: calc(10 / 16 * 1rem);
+  padding-left: calc(77 / 16 * 1rem);
   background-color: transparent;
   border: none;
+  outline: none;
   color: rgba(249, 249, 249, 1);
 }
 input::placeholder {
@@ -30,4 +35,32 @@ input::placeholder {
   font-weight: 700;
   color: white;
   margin-top: calc(20 / 16 * 1rem);
+  transition: background-color 0.4s ease, color 0.4s ease,
+    border-color 0.4s ease;
+}
+.btn:hover,
+.btn:focus {
+  background-color: var(--white-color);
+  color: var(--black-color-31);
+  border-color: var(--white-color);
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: calc(14 / 16 * 1rem);
+  }
+  label {
+    font-size: calc(14 / 16 * 1rem);
+  }
+  .filter {
+    padding: 1rem;
+  }
+  label {
+    top: 19px;
+    left: 19px;
+  }
+  .btn {
+    padding: calc(12 / 16 * 1rem) calc(28 / 16 * 1rem);
+    font-size: 1rem;
+  }
 }

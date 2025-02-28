@@ -34,6 +34,9 @@
   font-weight: 700;
   font-size: 1rem;
 }
+.user_icon span {
+  color: white;
+}
 .burger {
   transition: all 0.4s ease;
 }
@@ -49,6 +52,7 @@
 }
 .burger_wrapper {
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
@@ -101,7 +105,6 @@
 .menu_logout {
   padding: calc(10 / 16 * 1rem) calc(20 / 16 * 1rem);
   font-weight: 700;
-  font-size: calc(14 / 16 * 1rem);
   border: 1px solid rgba(249, 249, 249, 0.2);
   background-color: transparent;
   color: var(--white-color);

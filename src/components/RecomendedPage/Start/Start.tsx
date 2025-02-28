@@ -24,8 +24,10 @@ const Start: React.FC = () => {
         </li>
       </ul>
       <div className={css.link}>
-        <Link to="/library">My library</Link>
-        <Link to="/library">
+        <Link className={css.library} to="/library">
+          My library
+        </Link>
+        <Link className={css.arrow} to="/library">
           <IconContext.Provider value={{ size: "20px", color: "white" }}>
             <FaArrowRight />
           </IconContext.Provider>
