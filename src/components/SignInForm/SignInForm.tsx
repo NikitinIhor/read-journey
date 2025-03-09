@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import sprite from "../../assets/icons/sprite.svg";
 import { signin } from "../../redux/auth/ops";
-import { selectLoading } from "../../redux/auth/slice";
+import { selectError, selectLoading } from "../../redux/auth/slice";
 import { AppDispatch } from "../../redux/store";
+import Error from "../Error/Error";
 import Loader from "../Loader/Loader";
 import css from "../SignupForm/SignupForm.module.css";
 
@@ -34,6 +35,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ login, handleChangeForm }) => {
 
   const dispatch: AppDispatch = useDispatch();
   const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   const handleShowIcon = () => {
     setShowIcon((prev) => !prev);
@@ -44,6 +46,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ login, handleChangeForm }) => {
   };
 
   if (loading) return <Loader />;
+  if (error) return <Error />;
 
   return (
     <Formik

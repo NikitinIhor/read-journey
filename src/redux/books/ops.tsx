@@ -7,8 +7,11 @@ export const getAllBooks = createAsyncThunk(
   "books/getAll",
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get("books/recommended");
-      return res;
+      const res = await axios.get("/books/recommend");
+
+      console.log(res.data);
+
+      return res.data.results;
     } catch (error) {
       const err = error as AxiosError;
       return thunkAPI.rejectWithValue(err.message);

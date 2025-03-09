@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.text {
+  color: rgb(252, 91, 91);
+  font-size: 30px;
+}
