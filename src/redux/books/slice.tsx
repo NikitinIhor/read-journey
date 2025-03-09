@@ -51,7 +51,7 @@ const booksSlice = createSlice({
 });
 
 export const selectBooks = (state: RootState) => state.books.books;
-export const selectLoading = (state: RootState) => state.auth.loading;
-export const selectError = (state: RootState) => state.auth.error;
+export const selectLoading = (state: RootState) => state.books.loading;
+export const selectError = (state: RootState) => state.books.error;
 
 export default booksSlice.reducer;

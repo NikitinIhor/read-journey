@@ -14,12 +14,19 @@ import Loader from "../../Loader/Loader";
 import css from "./BooksGallery.module.css";
 
 import sprite from "../../../assets/icons/sprite.svg";
+import {
+  selectFilterByAuthor,
+  selectFilterByTitle,
+} from "../../../redux/filters/slice";
 
 const BooksGallery: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const books = useSelector(selectBooks);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+
+  const titleFilter = useSelector(selectFilterByTitle);
+  const authorFilter = useSelector(selectFilterByAuthor);
 
   const [index, setIndex] = useState(0);
   const [menu, setMenu] = useState(false);
@@ -48,6 +55,12 @@ const BooksGallery: React.FC = () => {
       setIndex((prev) => prev - 1);
     }
   };
+
+  const filteredBooks = books.filter(
+    (book) =>
+      book.title.toLowerCase().includes(titleFilter.toLowerCase()) &&
+      book.author.toLowerCase().includes(authorFilter.toLowerCase())
+  );
 
   return (
     <div className={css.container}>
@@ -82,7 +95,7 @@ const BooksGallery: React.FC = () => {
           className={css.list}
           style={{ transform: `translateX(-${index * 160}px)` }}
         >
-          {books.map((book) => (
+          {filteredBooks.map((book) => (
             <li
               className={css.item}
               key={book._id}
