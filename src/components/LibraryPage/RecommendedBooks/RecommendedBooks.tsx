@@ -11,15 +11,18 @@ import {
 import { AppDispatch } from "../../../redux/store";
 import Error from "../../Error/Error";
 import Loader from "../../Loader/Loader";
-import css from "./BooksGallery.module.css";
+import css from "./RecommendedBooks.module.css";
 
 import sprite from "../../../assets/icons/sprite.svg";
 import {
+  selectFilterByAPages,
   selectFilterByAuthor,
   selectFilterByTitle,
 } from "../../../redux/filters/slice";
 
-const BooksGallery: React.FC = () => {
+interface RecommendedBooksProps {}
+
+const RecommendedBooks: React.FC<RecommendedBooksProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const books = useSelector(selectBooks);
   const loading = useSelector(selectLoading);
@@ -27,6 +30,7 @@ const BooksGallery: React.FC = () => {
 
   const titleFilter = useSelector(selectFilterByTitle);
   const authorFilter = useSelector(selectFilterByAuthor);
+  const pageFilter = useSelector(selectFilterByAPages);
 
   const [index, setIndex] = useState(0);
   const [menu, setMenu] = useState(false);
@@ -56,38 +60,16 @@ const BooksGallery: React.FC = () => {
     }
   };
 
-  const filteredBooks = books.filter(
-    (book) =>
-      book.title.toLowerCase().includes(titleFilter.toLowerCase()) &&
-      book.author.toLowerCase().includes(authorFilter.toLowerCase())
-  );
-
+  // const filteredBooks = books.filter(
+  //   (book) =>
+  //     book.title.toLowerCase().includes(titleFilter.toLowerCase()) &&
+  //     book.author.toLowerCase().includes(authorFilter.toLowerCase()) &&
+  //     book.totalPages === pageFilter
+  // );
   return (
     <div className={css.container}>
       <div className={css.header}>
-        <h2 className={css.title}>Recommended</h2>
-        <div className={css.btns}>
-          <button
-            className={`${css.btn} ${index === 0 ? css.disabled : ""}`}
-            onClick={prevBook}
-            disabled={index === 0}
-          >
-            <IconContext.Provider value={{ size: "14px" }}>
-              <SlArrowLeft />
-            </IconContext.Provider>
-          </button>
-          <button
-            className={`${css.btn} ${
-              index >= books.length - 1 ? css.disabled : ""
-            }`}
-            onClick={nextBook}
-            disabled={index >= books.length - 1}
-          >
-            <IconContext.Provider value={{ size: "14px" }}>
-              <SlArrowRight />
-            </IconContext.Provider>
-          </button>
-        </div>
+        <h2 className={css.title}>Recommended books</h2>
       </div>
 
       <div className={css.slider}>
@@ -95,8 +77,8 @@ const BooksGallery: React.FC = () => {
           className={css.list}
           style={{ transform: `translateX(-${index * 160}px)` }}
         >
-          {filteredBooks.length > 0 ? (
-            filteredBooks.map((book) => (
+          {books.length > 0 ? (
+            books.map((book) => (
               <li
                 className={css.item}
                 key={book._id}
@@ -111,6 +93,29 @@ const BooksGallery: React.FC = () => {
             <p>No books are matching your search</p>
           )}
         </ul>
+      </div>
+
+      <div className={css.btns}>
+        <button
+          className={`${css.btn} ${index === 0 ? css.disabled : ""}`}
+          onClick={prevBook}
+          disabled={index === 0}
+        >
+          <IconContext.Provider value={{ size: "14px" }}>
+            <SlArrowLeft />
+          </IconContext.Provider>
+        </button>
+        <button
+          className={`${css.btn} ${
+            index >= books.length - 1 ? css.disabled : ""
+          }`}
+          onClick={nextBook}
+          disabled={index >= books.length - 1}
+        >
+          <IconContext.Provider value={{ size: "14px" }}>
+            <SlArrowRight />
+          </IconContext.Provider>
+        </button>
       </div>
 
       {menu && selectedBook && (
@@ -140,4 +145,4 @@ const BooksGallery: React.FC = () => {
   );
 };
 
-export default BooksGallery;
+export default RecommendedBooks;

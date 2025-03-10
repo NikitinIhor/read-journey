@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: calc(30 / 16 * 1rem);
+}
+.filter_body {
+  padding: calc(20 / 16 * 1rem);
+  border-radius: 30px;
+  background-color: var(--black-color-31);
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 / 16 * 1rem);
+}
+@media (min-width: 768px) {
+  .container {
+    gap: 1rem;
+  }
+  .filter_body {
+    flex-direction: row;
+    gap: calc(32 / 16 * 1rem);
+    padding: calc(32 / 16 * 1rem);
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    flex-direction: row;
+  }
+  .filter_body {
+    flex-direction: column;
+    gap: calc(32 / 16 * 1rem);
+    padding: calc(32 / 16 * 1rem);
+  }
+}

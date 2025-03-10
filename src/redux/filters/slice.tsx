@@ -6,6 +6,7 @@ export type RootState = ReturnType<typeof store.getState>;
 interface FilterState {
   title: string;
   author: string;
+  pages: number | null;
   loading: boolean;
   error: boolean;
 }
@@ -15,6 +16,7 @@ const initialState: FilterState = {
   error: false,
   title: "",
   author: "",
+  pages: null,
 };
 
 const filtersSlice = createSlice({
@@ -27,6 +29,9 @@ const filtersSlice = createSlice({
     filterByAuthor(state, action: PayloadAction<string>) {
       state.author = action.payload;
     },
+    filterByPages(state, action: PayloadAction<number>) {
+      state.pages = action.payload;
+    },
     setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
@@ -38,10 +43,17 @@ const filtersSlice = createSlice({
 
 export const selectFilterLoading = (state: RootState) => state.filters.loading;
 export const selectFilterError = (state: RootState) => state.filters.error;
+
 export const selectFilterByTitle = (state: RootState) => state.filters.title;
 export const selectFilterByAuthor = (state: RootState) => state.filters.author;
+export const selectFilterByAPages = (state: RootState) => state.filters.pages;
 
-export const { filterByTitle, filterByAuthor, setLoading, setError } =
-  filtersSlice.actions;
+export const {
+  filterByTitle,
+  filterByAuthor,
+  filterByPages,
+  setLoading,
+  setError,
+} = filtersSlice.actions;
 
 export default filtersSlice.reducer;
