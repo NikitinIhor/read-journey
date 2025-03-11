@@ -34,7 +34,12 @@ const Filters: React.FC<FiltersProps> = () => {
   };
 
   const handlePages = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(filterByPages(Number(event.target.value)));
+    const value = event.target.value;
+    if (value === "") {
+      dispatch(filterByPages(null));
+    } else {
+      dispatch(filterByPages(Number(value)));
+    }
   };
 
   if (loading) return <Loader />;
@@ -49,7 +54,7 @@ const Filters: React.FC<FiltersProps> = () => {
           type="text"
           name="title"
           value={title}
-          placeholder="I See You Are Interested In The Dark"
+          placeholder="Enter text"
           onChange={handleTitle}
         />
       </div>
@@ -59,7 +64,7 @@ const Filters: React.FC<FiltersProps> = () => {
           type="text"
           name="author"
           value={author}
-          placeholder="Hilarion Pavlyuk"
+          placeholder="Enter text"
           onChange={handleAuthor}
         />
       </div>
@@ -68,8 +73,8 @@ const Filters: React.FC<FiltersProps> = () => {
         <input
           type="number"
           name="pages"
-          value={pages}
-          placeholder="664"
+          value={pages ?? ""}
+          placeholder="0"
           onChange={handlePages}
         />
       </div>

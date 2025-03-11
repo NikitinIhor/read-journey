@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
-import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBooks } from "../../../redux/books/ops";
 import {
@@ -13,6 +12,8 @@ import Error from "../../Error/Error";
 import Loader from "../../Loader/Loader";
 import css from "./RecommendedBooks.module.css";
 
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import sprite from "../../../assets/icons/sprite.svg";
 import {
   selectFilterByAPages,
@@ -60,25 +61,30 @@ const RecommendedBooks: React.FC<RecommendedBooksProps> = () => {
     }
   };
 
-  // const filteredBooks = books.filter(
-  //   (book) =>
-  //     book.title.toLowerCase().includes(titleFilter.toLowerCase()) &&
-  //     book.author.toLowerCase().includes(authorFilter.toLowerCase()) &&
-  //     book.totalPages === pageFilter
-  // );
+  const filteredBooks = books.filter((book) => {
+    const title = titleFilter
+      ? book.title.toLowerCase().includes(titleFilter.toLowerCase())
+      : true;
+    const author = authorFilter
+      ? book.author.toLowerCase().includes(authorFilter.toLowerCase())
+      : true;
+    const pages = pageFilter ? book.totalPages === pageFilter : true;
+
+    return title && author && pages;
+  });
+
   return (
     <div className={css.container}>
       <div className={css.header}>
         <h2 className={css.title}>Recommended books</h2>
       </div>
-
       <div className={css.slider}>
         <ul
           className={css.list}
-          style={{ transform: `translateX(-${index * 160}px)` }}
+          style={{ transform: `translateX(-${index * 90}px)` }}
         >
-          {books.length > 0 ? (
-            books.map((book) => (
+          {filteredBooks.length > 0 ? (
+            filteredBooks.map((book) => (
               <li
                 className={css.item}
                 key={book._id}
@@ -95,27 +101,33 @@ const RecommendedBooks: React.FC<RecommendedBooksProps> = () => {
         </ul>
       </div>
 
-      <div className={css.btns}>
-        <button
-          className={`${css.btn} ${index === 0 ? css.disabled : ""}`}
-          onClick={prevBook}
-          disabled={index === 0}
-        >
-          <IconContext.Provider value={{ size: "14px" }}>
-            <SlArrowLeft />
-          </IconContext.Provider>
-        </button>
-        <button
-          className={`${css.btn} ${
-            index >= books.length - 1 ? css.disabled : ""
-          }`}
-          onClick={nextBook}
-          disabled={index >= books.length - 1}
-        >
-          <IconContext.Provider value={{ size: "14px" }}>
-            <SlArrowRight />
-          </IconContext.Provider>
-        </button>
+      <div className={css.footer}>
+        <Link className={css.recommended} to="/recommended">
+          Home
+        </Link>
+
+        <div className={css.btns}>
+          <button
+            className={`${css.btn} ${index === 0 ? css.disabled : ""}`}
+            onClick={prevBook}
+            disabled={index === 0}
+          >
+            <IconContext.Provider value={{ size: "14px" }}>
+              <FaArrowLeftLong />
+            </IconContext.Provider>
+          </button>
+          <button
+            className={`${css.btn} ${
+              index >= books.length - 1 ? css.disabled : ""
+            }`}
+            onClick={nextBook}
+            disabled={index >= books.length - 1}
+          >
+            <IconContext.Provider value={{ size: "14px" }}>
+              <FaArrowRightLong />
+            </IconContext.Provider>
+          </button>
+        </div>
       </div>
 
       {menu && selectedBook && (

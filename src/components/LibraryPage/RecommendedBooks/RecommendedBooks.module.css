@@ -1,7 +1,8 @@
 .container {
-  padding: calc(40 / 16 * 1rem) calc(20 / 16 * 1rem);
+  padding: calc(20 / 16 * 1rem);
   border-radius: 30px;
-  background-color: var(--black-color-31);
+  background-color: var(--black-color-38);
+  margin-bottom: calc(10 / 16 * 1rem);
 }
 .header {
   display: flex;
@@ -11,9 +12,9 @@
 .title {
   display: inline-block;
   font-weight: 700;
-  font-size: calc(20 / 16 * 1rem);
-  margin-bottom: calc(34 / 16 * 1rem);
-  color: white;
+  font-size: calc(18 / 16 * 1rem);
+  margin-bottom: calc(14 / 16 * 1rem);
+  color: rgba(227, 227, 227, 1);
 }
 .btns {
   display: flex;
@@ -22,24 +23,15 @@
 }
 .btn {
   color: white;
-  border-color: white;
-  width: calc(32 / 16 * 1rem);
-  height: calc(32 / 16 * 1rem);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgba(249, 249, 249, 0.2);
   transition: border-color 0.4s ease;
 }
 .disabled {
-  color: rgba(249, 249, 249, 0.2);
-  border-color: rgba(249, 249, 249, 0.2);
+  color: transparent;
 }
 
 .slider {
   overflow: hidden;
-  width: 100%;
+  width: calc(260 / 16 * 1rem);
   position: relative;
 }
 .list {
@@ -48,22 +40,22 @@
   overflow: hidden;
   align-items: center;
   justify-content: space-between;
-  gap: calc(21 / 16 * 1rem);
+  gap: calc(20 / 16 * 1rem);
   transition: transform 0.5s ease-in-out;
   width: max-content;
 }
 .item {
+  font-weight: 700;
   flex: 0 0 auto;
-  width: calc(137 / 16 * 1rem);
+  width: calc(71 / 16 * 1rem);
   cursor: pointer;
   overflow: hidden;
 }
 .item img {
   border-radius: 8px;
   margin-bottom: calc(8 / 16 * 1rem);
-  font-weight: 700;
-  width: calc(137 / 16 * 1rem);
-  height: calc(208 / 16 * 1rem);
+  width: calc(71 / 16 * 1rem);
+  height: calc(107 / 16 * 1rem);
   transition: transform 0.4s ease;
 }
 .item:hover img {
@@ -71,7 +63,7 @@
 }
 .item h2 {
   margin-bottom: calc(8 / 16 * 1rem);
-  font-size: calc(14 / 16 * 1rem);
+  font-size: calc(10 / 16 * 1rem);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -80,6 +72,7 @@
 .item p {
   font-size: calc(10 / 16 * 1rem);
   color: var(--black-color-104);
+  margin-bottom: calc(17 / 16 * 1rem);
 }
 .overlay {
   position: fixed;
@@ -148,6 +141,20 @@
   color: var(--black-color-31);
   border-color: var(--white-color);
 }
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.recommended {
+  color: var(--black-color-104);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+.recommended:hover,
+.recommended:focus {
+  color: var(--black-white);
+}
 @media (min-width: 768px) {
   .container {
     padding: calc(40 / 16 * 1rem);
@@ -187,19 +194,4 @@
 }
 
 @media (min-width: 1280px) {
-  .container {
-    width: calc(800 / 16 * 1rem);
-  }
-  .list {
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-    flex-wrap: nowrap;
-    overflow: hidden;
-    gap: calc(20 / 16 * 1rem);
-    transition: transform 0.5s ease-in-out;
-  }
-  .item {
-    width: calc(137 / 16 * 1rem);
-    overflow: hidden;
-  }
 }

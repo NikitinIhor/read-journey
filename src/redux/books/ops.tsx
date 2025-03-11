@@ -8,7 +8,6 @@ export const getAllBooks = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get("/books/recommend?limit=100");
-
       return res.data.results;
     } catch (error) {
       const err = error as AxiosError;

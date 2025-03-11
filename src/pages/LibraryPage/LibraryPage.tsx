@@ -1,4 +1,5 @@
 import Header from "../../components/Header/Header";
+import Filters from "../../components/LibraryPage/Filters/Filters";
 import MyLibrary from "../../components/LibraryPage/MyLibrary/MyLibrary";
 import RecommendedBooks from "../../components/LibraryPage/RecommendedBooks/RecommendedBooks";
 import css from "./LibraryPage.module.css";
@@ -11,7 +12,7 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
       <Header />
       <div className={css.container}>
         <div className={css.filter_body}>
-          {/* <Filters /> */}
+          <Filters />
           <RecommendedBooks />
         </div>
         <MyLibrary />
