@@ -1,0 +1,113 @@
+.container {
+  position: relative;
+  padding: calc(40 / 16 * 1rem) calc(20 / 16 * 1rem);
+  border-radius: 30px;
+  background-color: var(--black-color-31);
+  min-height: calc(407 / 16 * 1rem);
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: calc(63 / 16 * 1rem);
+}
+.title {
+  font-size: calc(20 / 16 * 1rem);
+  font-weight: 700;
+}
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+}
+.select {
+  font-size: calc(12 / 16 * 1rem);
+  padding: calc(12 / 16 * 1rem) calc(14 / 16 * 1rem);
+  border: 1px solid rgba(62, 62, 62, 1);
+  border-radius: 12px;
+  background-color: transparent;
+  color: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(120 / 16 * 1rem);
+}
+.select:focus {
+  outline: none;
+  border-color: rgba(62, 62, 62, 1);
+}
+
+option {
+  color: var(--black-color-104);
+  background-color: var(--black-color-38);
+  outline: none;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.select:focus {
+  outline: none;
+}
+.empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.image {
+  padding: calc(25 / 16 * 1rem);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black-color-38);
+  width: calc(100 / 16 * 1rem);
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: calc(10 / 16 * 1rem);
+}
+.image img {
+  width: calc(50 / 16 * 1rem);
+  height: calc(50 / 16 * 1rem);
+}
+.text {
+  width: calc(200 / 16 * 1rem);
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+}
+.text span {
+  color: gray;
+}
+@media (min-width: 768px) {
+  .container {
+    padding: calc(40 / 16 * 1rem);
+  }
+  .title {
+    font-size: calc(28 / 16 * 1rem);
+  }
+  .image {
+    width: calc(130 / 16 * 1rem);
+    margin-bottom: calc(20 / 16 * 1rem);
+  }
+  .image img {
+    width: calc(70 / 16 * 1rem);
+    height: calc(70 / 16 * 1rem);
+  }
+  .text {
+    width: calc(274 / 16 * 1rem);
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    width: 100%;
+  }
+  .empty {
+    padding-bottom: 0;
+  }
+}

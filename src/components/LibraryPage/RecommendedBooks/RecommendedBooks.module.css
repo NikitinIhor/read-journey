@@ -43,11 +43,13 @@
   gap: calc(20 / 16 * 1rem);
   transition: transform 0.5s ease-in-out;
   width: max-content;
+  margin-bottom: 1rem;
 }
 .item {
   font-weight: 700;
   flex: 0 0 auto;
   width: calc(71 / 16 * 1rem);
+  height: calc(107 / 16 * 1rem);
   cursor: pointer;
   overflow: hidden;
 }
@@ -157,7 +159,7 @@
 }
 @media (min-width: 768px) {
   .container {
-    padding: calc(40 / 16 * 1rem);
+    padding: calc(28 / 16 * 1rem) calc(20 / 16 * 1rem);
   }
   .title {
     font-size: calc(28 / 16 * 1rem);
@@ -175,10 +177,7 @@
   .body {
     padding: calc(50 / 16 * 1rem) calc(174 / 16 * 1rem);
   }
-  .content img {
-    width: calc(153 / 16 * 1rem);
-    height: calc(233 / 16 * 1rem);
-  }
+
   .content h2 {
     font-size: calc(20 / 16 * 1rem);
   }
@@ -191,7 +190,4 @@
     width: calc(162 / 16 * 1rem);
     font-size: 1rem;
   }
-}
-
-@media (min-width: 1280px) {
 }
