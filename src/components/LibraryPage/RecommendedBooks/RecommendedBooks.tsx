@@ -20,6 +20,7 @@ import {
   selectFilterByAuthor,
   selectFilterByTitle,
 } from "../../../redux/filters/slice";
+import GoodJob from "../../GoodJob/GoodJob";
 
 interface RecommendedBooksProps {}
 
@@ -35,6 +36,7 @@ const RecommendedBooks: React.FC<RecommendedBooksProps> = () => {
 
   const [index, setIndex] = useState(0);
   const [menu, setMenu] = useState(false);
+  const [subMenu, setSubMenu] = useState(false);
   const [selectedBook, setSelectedBook] = useState<any>(null);
 
   useEffect(() => {
@@ -47,6 +49,11 @@ const RecommendedBooks: React.FC<RecommendedBooksProps> = () => {
   const toggleMenu = (book?: any) => {
     setSelectedBook(book);
     setMenu((prev) => !prev);
+  };
+
+  const toggleSubMenu = () => {
+    setMenu(false);
+    setSubMenu((prev) => !prev);
   };
 
   const nextBook = () => {
@@ -147,12 +154,13 @@ const RecommendedBooks: React.FC<RecommendedBooksProps> = () => {
                 <p
                   className={css.total}
                 >{`${selectedBook.totalPages} pages`}</p>
-                <button>Add to library</button>
+                <button onClick={toggleSubMenu}>Add to library</button>
               </div>
             </div>
           </div>
         </>
       )}
+      {subMenu && <GoodJob toggleSubMenu={toggleSubMenu} />}
     </div>
   );
 };

@@ -102,6 +102,7 @@
   padding: calc(40 / 16 * 1rem) calc(98 / 16 * 1rem);
   border: 1px solid rgba(104, 104, 104, 0.2);
   background-color: var(--black-color-31);
+  border-radius: 12px;
 }
 .content {
   width: calc(140 / 16 * 1rem);
