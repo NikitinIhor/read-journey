@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBooks } from "../../../redux/books/ops";
+import { addBook, getAllBooks } from "../../../redux/books/ops";
 import {
   selectBooks,
   selectError,
@@ -137,7 +137,14 @@ const BooksGallery: React.FC = () => {
                 <p
                   className={css.total}
                 >{`${selectedBook.totalPages} pages`}</p>
-                <button onClick={toggleSubMenu}>Add to library</button>
+                <button
+                  onClick={() => {
+                    dispatch(addBook(selectedBook._id));
+                    toggleSubMenu();
+                  }}
+                >
+                  Add to library
+                </button>
               </div>
             </div>
           </div>

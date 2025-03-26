@@ -1,14 +1,30 @@
 import { useState } from "react";
-import { RiArrowDownSLine } from "react-icons/ri";
+import { RiArrowDownSLine, RiDeleteBin5Line } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 import books from "../../../assets/images/books.png";
+import {
+  selectError,
+  selectLibrary,
+  selectLoading,
+} from "../../../redux/books/slice";
+import { AppDispatch } from "../../../redux/store";
+import Error from "../../Error/Error";
+import Loader from "../../Loader/Loader";
 import css from "./MyLibrary.module.css";
 
 const MyLibrary: React.FC = () => {
   const [selectedValue, setSelectedValue] = useState("all");
+  const library = useSelector(selectLibrary);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);
   };
+
+  if (loading) return <Loader />;
+  if (error) return <Error />;
 
   return (
     <div className={css.container}>
@@ -33,15 +49,37 @@ const MyLibrary: React.FC = () => {
         </div>
       </div>
 
-      <div className={css.empty}>
-        <div className={css.image}>
-          <img src={books} alt="image of books" />
+      {library.length > 0 ? (
+        <ul className={css.list}>
+          {library.map((book) => (
+            <li className={css.item} key={book._id}>
+              <img src={book.imageUrl} alt={book.title} />
+              <div className={css.footer}>
+                <div className={css.content}>
+                  <h2>{book.title}</h2>
+                  <p>{book.author}</p>
+                </div>
+                <button
+                  // onClick={() => dispatch(deleteBook(book._id))}
+                  className={css.delete}
+                >
+                  <RiDeleteBin5Line color="red" size={20} />
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className={css.empty}>
+          <div className={css.image}>
+            <img src={books} alt="image of books" />
+          </div>
+          <p className={css.text}>
+            To start training, add <span>some of your books</span> or from the
+            recommended ones.
+          </p>
         </div>
-        <p className={css.text}>
-          To start training, add <span>some of your books</span> or from the
-          recommended ones.
-        </p>
-      </div>
+      )}
     </div>
   );
 };

@@ -84,6 +84,62 @@ option {
 .text span {
   color: gray;
 }
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  align-items: center;
+  gap: calc(20 / 16 * 1rem);
+  margin-bottom: 1rem;
+}
+.item {
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+}
+.item img {
+  border-radius: 8px;
+  margin-bottom: calc(8 / 16 * 1rem);
+  width: calc(137 / 16 * 1rem);
+  height: calc(208 / 16 * 1rem);
+  transition: transform 0.4s ease;
+}
+.item:hover img {
+  transform: scale(0.95);
+}
+.item h2 {
+  font-weight: 700;
+  margin-bottom: calc(8 / 16 * 1rem);
+  font-size: calc(14 / 16 * 1rem);
+  width: calc(95 / 16 * 1rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item p {
+  font-size: calc(10 / 16 * 1rem);
+  color: var(--black-color-104);
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.delete {
+  align-self: self-end;
+  width: calc(34 / 16 * 1rem);
+  height: calc(34 / 16 * 1rem);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e850501a;
+  border: 1px solid #e8505033;
+  transition: transform 0.4s ease;
+}
+.delete:hover {
+  transform: scale(1.2);
+}
 @media (min-width: 768px) {
   .container {
     padding: calc(40 / 16 * 1rem);

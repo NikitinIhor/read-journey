@@ -15,3 +15,29 @@ export const getAllBooks = createAsyncThunk(
     }
   }
 );
+
+export const addBook = createAsyncThunk(
+  "books/addBook",
+  async (id: string, thunkAPI) => {
+    try {
+      const res = await axios.post(`/books/add/${id}`);
+      return res.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
+export const deleteBook = createAsyncThunk(
+  "books/deleteBook",
+  async (id: string, thunkAPI) => {
+    try {
+      const res = await axios.delete(`/books/remove/${id}`);
+      return res.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);

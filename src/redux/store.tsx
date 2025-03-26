@@ -12,12 +12,19 @@ const authPersistConfig = {
   whitelist: ["token", "user", "isLoggedIn"],
 };
 
+const booksPersistConfig = {
+  key: "books",
+  storage,
+  whitelist: ["library"],
+};
+
 const persistedReducer = persistReducer(authPersistConfig, authReducer);
+const persistedBooksReducer = persistReducer(booksPersistConfig, booksReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    books: booksReducer,
+    books: persistedBooksReducer,
     filters: filtersReducer,
   },
   middleware: (getDefaultMiddleware) =>
