@@ -93,6 +93,7 @@ option {
   margin-bottom: 1rem;
 }
 .item {
+  position: relative;
   font-weight: 700;
   cursor: pointer;
   overflow: hidden;
@@ -120,13 +121,11 @@ option {
   font-size: calc(10 / 16 * 1rem);
   color: var(--black-color-104);
 }
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+
 .delete {
-  align-self: self-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   width: calc(34 / 16 * 1rem);
   height: calc(34 / 16 * 1rem);
   border-radius: 50%;

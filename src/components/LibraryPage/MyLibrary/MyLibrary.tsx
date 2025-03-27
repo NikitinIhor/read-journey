@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { RiArrowDownSLine, RiDeleteBin5Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import books from "../../../assets/images/books.png";
+import { deleteBook } from "../../../redux/books/ops";
 import {
   selectError,
   selectLibrary,
@@ -53,19 +55,19 @@ const MyLibrary: React.FC = () => {
         <ul className={css.list}>
           {library.map((book) => (
             <li className={css.item} key={book._id}>
-              <img src={book.imageUrl} alt={book.title} />
-              <div className={css.footer}>
+              <Link to="/statistica">
+                <img src={book.imageUrl} alt={book.title} />
                 <div className={css.content}>
                   <h2>{book.title}</h2>
                   <p>{book.author}</p>
                 </div>
-                <button
-                  // onClick={() => dispatch(deleteBook(book._id))}
-                  className={css.delete}
-                >
-                  <RiDeleteBin5Line color="red" size={20} />
-                </button>
-              </div>
+              </Link>
+              <button
+                onClick={() => dispatch(deleteBook(book._id))}
+                className={css.delete}
+              >
+                <RiDeleteBin5Line color="red" size={20} />
+              </button>
             </li>
           ))}
         </ul>

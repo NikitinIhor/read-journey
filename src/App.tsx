@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader/Loader";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
+import StatisticaPage from "./pages/StatisticaPage/StatisticaPage";
 import { refresh } from "./redux/auth/ops";
 import { selectIsRefreshing } from "./redux/auth/slice";
 import { AppDispatch } from "./redux/store";
@@ -48,6 +49,12 @@ const App: React.FC = () => {
             path="/library"
             element={
               <PrivateRoute component={<LibraryPage />} redirectTo="/" />
+            }
+          />
+          <Route
+            path="/statistica"
+            element={
+              <PrivateRoute component={<StatisticaPage />} redirectTo="/" />
             }
           />
           <Route path="*" element={<NotFoundPage />} />
