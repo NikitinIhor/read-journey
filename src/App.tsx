@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader/Loader";
@@ -29,6 +30,7 @@ const App: React.FC = () => {
   ) : (
     <>
       <Suspense fallback={<Loader />}>
+        <Toaster />
         <Routes>
           <Route
             path="/"

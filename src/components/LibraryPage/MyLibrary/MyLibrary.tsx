@@ -1,16 +1,12 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { RiArrowDownSLine, RiDeleteBin5Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import books from "../../../assets/images/books.png";
 import { deleteBook } from "../../../redux/books/ops";
-import {
-  selectError,
-  selectLibrary,
-  selectLoading,
-} from "../../../redux/books/slice";
+import { selectLibrary, selectLoading } from "../../../redux/books/slice";
 import { AppDispatch } from "../../../redux/store";
-import Error from "../../Error/Error";
 import Loader from "../../Loader/Loader";
 import css from "./MyLibrary.module.css";
 
@@ -18,15 +14,31 @@ const MyLibrary: React.FC = () => {
   const [selectedValue, setSelectedValue] = useState("all");
   const library = useSelector(selectLibrary);
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);
   };
 
+  const handleDeleteBook = async (bookId: string) => {
+    try {
+      await dispatch(deleteBook(bookId)).unwrap();
+
+      toast.success("Book was deleted from library", {
+        duration: 4000,
+        position: "top-right",
+      });
+    } catch (error) {
+      const errorMessage = error as string;
+      toast.error(errorMessage, {
+        duration: 4000,
+        position: "top-right",
+      });
+    }
+  };
+
   if (loading) return <Loader />;
-  if (error) return <Error />;
 
   return (
     <div className={css.container}>
@@ -63,7 +75,7 @@ const MyLibrary: React.FC = () => {
                 </div>
               </Link>
               <button
-                onClick={() => dispatch(deleteBook(book._id))}
+                onClick={() => handleDeleteBook(book._id)}
                 className={css.delete}
               >
                 <RiDeleteBin5Line color="red" size={20} />

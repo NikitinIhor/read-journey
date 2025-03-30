@@ -6,13 +6,14 @@ import { addBook, getAllBooks } from "../../../redux/books/ops";
 import {
   selectBooks,
   selectError,
+  selectLibrary,
   selectLoading,
 } from "../../../redux/books/slice";
 import { AppDispatch } from "../../../redux/store";
-import Error from "../../Error/Error";
 import Loader from "../../Loader/Loader";
 import css from "./BooksGallery.module.css";
 
+import toast from "react-hot-toast";
 import sprite from "../../../assets/icons/sprite.svg";
 import {
   selectFilterByAuthor,
@@ -23,6 +24,7 @@ import GoodJob from "../../GoodJob/GoodJob";
 const BooksGallery: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const books = useSelector(selectBooks);
+  const library = useSelector(selectLibrary);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
@@ -39,7 +41,13 @@ const BooksGallery: React.FC = () => {
   }, [dispatch]);
 
   if (loading) return <Loader />;
-  if (error) return <Error />;
+
+  if (error) {
+    toast.error(error, {
+      duration: 4000,
+      position: "top-right",
+    });
+  }
 
   const toggleMenu = (book?: any) => {
     setSelectedBook(book);
@@ -60,6 +68,36 @@ const BooksGallery: React.FC = () => {
   const prevBook = () => {
     if (index > 0) {
       setIndex((prev) => prev - 1);
+    }
+  };
+
+  const handleAddBook = async () => {
+    const isAlreadyAdded = library.some(
+      (book) => book.title === selectedBook.title
+    );
+
+    if (isAlreadyAdded) {
+      toast.error("This book is already in your library!", {
+        duration: 4000,
+        position: "top-right",
+      });
+      return;
+    }
+
+    try {
+      await dispatch(addBook(selectedBook._id)).unwrap();
+      toggleSubMenu();
+
+      toast.success("Book was added to library", {
+        duration: 4000,
+        position: "top-right",
+      });
+    } catch (error) {
+      const errorMessage = error as string;
+      toast.error(errorMessage, {
+        duration: 4000,
+        position: "top-right",
+      });
     }
   };
 
@@ -137,14 +175,7 @@ const BooksGallery: React.FC = () => {
                 <p
                   className={css.total}
                 >{`${selectedBook.totalPages} pages`}</p>
-                <button
-                  onClick={() => {
-                    dispatch(addBook(selectedBook._id));
-                    toggleSubMenu();
-                  }}
-                >
-                  Add to library
-                </button>
+                <button onClick={handleAddBook}>Add to library</button>
               </div>
             </div>
           </div>

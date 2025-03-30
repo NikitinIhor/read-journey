@@ -9,7 +9,7 @@ import filtersReducer from "./filters/slice";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token", "user", "isLoggedIn"],
+  whitelist: ["token", "user", "isLoggedIn", "library"],
 };
 
 const booksPersistConfig = {

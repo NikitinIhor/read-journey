@@ -189,7 +189,7 @@
 
 @media (min-width: 1280px) {
   .container {
-    width: calc(800 / 16 * 1rem);
+    width: calc(850 / 16 * 1rem);
   }
   .list {
     display: grid;

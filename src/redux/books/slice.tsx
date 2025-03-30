@@ -15,14 +15,14 @@ interface Books {
 
 interface BooksState {
   loading: boolean;
-  error: boolean;
+  error: string | null;
   books: Books[];
   library: Books[];
 }
 
 const initialState: BooksState = {
   loading: false,
-  error: false,
+  error: null,
   books: [],
   library: [],
 };
@@ -35,47 +35,48 @@ const booksSlice = createSlice({
     builder
       .addCase(getAllBooks.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(
         getAllBooks.fulfilled,
         (state, action: PayloadAction<Books[]>) => {
           state.loading = false;
-          state.error = false;
+          state.error = null;
           state.books = action.payload;
         }
       )
-      .addCase(getAllBooks.rejected, (state) => {
+      .addCase(getAllBooks.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = action.payload as string;
       })
       .addCase(addBook.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(addBook.fulfilled, (state, action: PayloadAction<Books>) => {
         state.loading = false;
-        state.error = false;
+        state.error = null;
         state.library.push(action.payload);
       })
-      .addCase(addBook.rejected, (state) => {
+      .addCase(addBook.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = action.payload as string;
       })
       .addCase(deleteBook.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(deleteBook.fulfilled, (state, action: PayloadAction<string>) => {
         state.loading = false;
-        state.error = false;
+        state.error = null;
+
         state.library = state.library.filter(
           (book) => book._id !== action.payload
         );
       })
-      .addCase(deleteBook.rejected, (state) => {
+      .addCase(deleteBook.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = action.payload as string;
       });
   },
 });

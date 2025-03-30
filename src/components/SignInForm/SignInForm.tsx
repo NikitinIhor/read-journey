@@ -1,12 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import sprite from "../../assets/icons/sprite.svg";
 import { signin } from "../../redux/auth/ops";
-import { selectError, selectLoading } from "../../redux/auth/slice";
+import { selectLoading } from "../../redux/auth/slice";
 import { AppDispatch } from "../../redux/store";
-import Error from "../Error/Error";
 import Loader from "../Loader/Loader";
 import css from "../SignupForm/SignupForm.module.css";
 
@@ -35,18 +35,29 @@ const SignInForm: React.FC<SignInFormProps> = ({ login, handleChangeForm }) => {
 
   const dispatch: AppDispatch = useDispatch();
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
 
   const handleShowIcon = () => {
     setShowIcon((prev) => !prev);
   };
 
-  const handleSubmit = (values: SigninFormValues) => {
-    dispatch(signin(values));
+  const handleSubmit = async (values: SigninFormValues) => {
+    try {
+      await dispatch(signin(values)).unwrap();
+
+      toast.success("Successfully logged in!", {
+        duration: 4000,
+        position: "top-right",
+      });
+    } catch (error) {
+      const errorMessage = error as string;
+      toast.error(errorMessage, {
+        duration: 4000,
+        position: "top-right",
+      });
+    }
   };
 
   if (loading) return <Loader />;
-  if (error) return <Error />;
 
   return (
     <Formik

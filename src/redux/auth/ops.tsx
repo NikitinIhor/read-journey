@@ -27,7 +27,13 @@ export const signup = createAsyncThunk(
       return res.data;
     } catch (error) {
       const err = error as AxiosError;
-      return thunkAPI.rejectWithValue(err.message);
+      if (err.response?.status === 409) {
+        return thunkAPI.rejectWithValue("Such email already exists");
+      }
+
+      return thunkAPI.rejectWithValue(
+        "Server error... please reload the page."
+      );
     }
   }
 );
@@ -41,7 +47,13 @@ export const signin = createAsyncThunk(
       return res.data;
     } catch (error) {
       const err = error as AxiosError;
-      return thunkAPI.rejectWithValue(err.message);
+      if (err.response?.status === 401) {
+        return thunkAPI.rejectWithValue("Email or password invalid");
+      }
+
+      return thunkAPI.rejectWithValue(
+        "Server error... please reload the page."
+      );
     }
   }
 );

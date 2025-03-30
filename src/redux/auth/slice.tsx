@@ -12,7 +12,7 @@ interface User {
 interface AuthState {
   user: User | null;
   loading: boolean;
-  error: boolean;
+  error: string | null;
   token: string | null;
   isLoggedIn: boolean;
   isRefreshing: boolean;
@@ -21,7 +21,7 @@ interface AuthState {
 const initialState: AuthState = {
   user: null,
   loading: false,
-  error: false,
+  error: null,
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -35,7 +35,7 @@ const authSlice = createSlice({
     builder
       .addCase(signup.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(
         signup.fulfilled,
@@ -44,7 +44,7 @@ const authSlice = createSlice({
           action: PayloadAction<{ name: string; email: string; token: string }>
         ) => {
           state.loading = false;
-          state.error = false;
+          state.error = null;
           state.user = {
             name: action.payload.name,
             email: action.payload.email,
@@ -53,13 +53,13 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
         }
       )
-      .addCase(signup.rejected, (state) => {
+      .addCase(signup.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = action.payload as string;
       })
       .addCase(signin.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(
         signin.fulfilled,
@@ -68,7 +68,7 @@ const authSlice = createSlice({
           action: PayloadAction<{ name: string; email: string; token: string }>
         ) => {
           state.loading = false;
-          state.error = false;
+          state.error = null;
           state.user = {
             name: action.payload.name,
             email: action.payload.email,
@@ -77,28 +77,28 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
         }
       )
-      .addCase(signin.rejected, (state) => {
+      .addCase(signin.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = action.payload as string;
       })
       .addCase(signout.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(signout.fulfilled, (state) => {
         state.loading = false;
-        state.error = false;
+        state.error = null;
         state.token = null;
         state.user = null;
         state.isLoggedIn = false;
       })
-      .addCase(signout.rejected, (state) => {
+      .addCase(signout.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = action.payload as string;
       })
       .addCase(refresh.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
         state.isRefreshing = true;
       })
       .addCase(
@@ -108,7 +108,7 @@ const authSlice = createSlice({
           action: PayloadAction<{ name: string; email: string; token: string }>
         ) => {
           state.loading = false;
-          state.error = false;
+          state.error = null;
           state.isLoggedIn = true;
           state.isRefreshing = false;
           state.user = {
@@ -118,9 +118,9 @@ const authSlice = createSlice({
           state.token = action.payload.token;
         }
       )
-      .addCase(refresh.rejected, (state) => {
+      .addCase(refresh.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = action.payload as string;
         state.isLoggedIn = false;
         state.isRefreshing = false;
         state.token = null;

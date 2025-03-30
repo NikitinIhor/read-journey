@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterByAuthor,
@@ -8,7 +9,6 @@ import {
   selectFilterLoading,
 } from "../../../redux/filters/slice";
 import { AppDispatch } from "../../../redux/store";
-import Error from "../../Error/Error";
 import Loader from "../../Loader/Loader";
 import css from "./RecommendedFilters.module.css";
 
@@ -30,7 +30,13 @@ const RecommendedFilters: React.FC<RecommendedFiltersProps> = () => {
   };
 
   if (loading) return <Loader />;
-  if (error) return <Error />;
+
+  if (error) {
+    toast.error(error, {
+      duration: 4000,
+      position: "top-right",
+    });
+  }
 
   return (
     <div>

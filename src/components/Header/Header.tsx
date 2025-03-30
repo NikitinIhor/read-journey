@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import sprite from "../../assets/icons/sprite.svg";
@@ -27,9 +28,21 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   const handleSignout = async () => {
-    setSigningOut(true);
-    await dispatch(signout());
-    setSigningOut(false);
+    try {
+      setSigningOut(true);
+      await dispatch(signout()).unwrap();
+      toast.success("Successfully logged out!", {
+        duration: 4000,
+        position: "top-right",
+      });
+    } catch (error) {
+      setSigningOut(false);
+      const errorMessage = error as string;
+      toast.error(errorMessage, {
+        duration: 4000,
+        position: "top-right",
+      });
+    }
   };
 
   return (

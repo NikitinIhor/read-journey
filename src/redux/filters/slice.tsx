@@ -8,12 +8,12 @@ interface FilterState {
   author: string;
   totalPages: number | null;
   loading: boolean;
-  error: boolean;
+  error: string | null;
 }
 
 const initialState: FilterState = {
   loading: false,
-  error: false,
+  error: null,
   title: "",
   author: "",
   totalPages: null,
@@ -35,8 +35,11 @@ const filtersSlice = createSlice({
     setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
-    setError(state, action: PayloadAction<boolean>) {
+    setError(state, action: PayloadAction<string>) {
       state.error = action.payload;
+    },
+    clearError(state) {
+      state.error = null;
     },
   },
 });
@@ -55,6 +58,7 @@ export const {
   filterByPages,
   setLoading,
   setError,
+  clearError,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
