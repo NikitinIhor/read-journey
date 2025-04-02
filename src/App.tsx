@@ -54,7 +54,7 @@ const App: React.FC = () => {
             }
           />
           <Route
-            path="/statistica"
+            path="/statistica/:bookId"
             element={
               <PrivateRoute component={<StatisticaPage />} redirectTo="/" />
             }

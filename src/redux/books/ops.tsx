@@ -64,3 +64,21 @@ export const deleteBook = createAsyncThunk(
     }
   }
 );
+
+export const getBookInfo = createAsyncThunk(
+  "books/getBook",
+  async (id: string, thunkAPI) => {
+    try {
+      const res = await axios.get(`/books/${id}`);
+      return res.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      if (err.response?.status === 404) {
+        return thunkAPI.rejectWithValue("Book is not found");
+      }
+      return thunkAPI.rejectWithValue(
+        "Server error... please reload the page."
+      );
+    }
+  }
+);

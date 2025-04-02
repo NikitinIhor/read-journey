@@ -89,8 +89,9 @@ option {
   flex-wrap: wrap;
   overflow: hidden;
   align-items: center;
-  gap: calc(20 / 16 * 1rem);
+  gap: calc(10 / 16 * 1rem);
   margin-bottom: 1rem;
+  justify-content: center;
 }
 .item {
   position: relative;
@@ -156,6 +157,10 @@ option {
   }
   .text {
     width: calc(274 / 16 * 1rem);
+  }
+  .list {
+    gap: calc(20 / 16 * 1rem);
+    justify-content: start;
   }
 }
 @media (min-width: 1280px) {

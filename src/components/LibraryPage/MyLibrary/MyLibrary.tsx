@@ -67,7 +67,7 @@ const MyLibrary: React.FC = () => {
         <ul className={css.list}>
           {library.map((book) => (
             <li className={css.item} key={book._id}>
-              <Link to="/statistica">
+              <Link to={`/statistica/${book._id}`}>
                 <img src={book.imageUrl} alt={book.title} />
                 <div className={css.content}>
                   <h2>{book.title}</h2>
