@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import star from "../../assets/images/star.png";
 import Header from "../../components/Header/Header";
+// import Progress from "../../components/StatisticaPage/Progress/Progress";
+import Diary from "../../components/StatisticaPage/Diary/Diary";
 import { selectLibrary } from "../../redux/books/slice";
 import css from "./StatisticaPage.module.css";
 
@@ -38,16 +39,8 @@ const StatisticaPage: React.FC<StatisticaPageProps> = () => {
               </div>
               <button className={css.btn}>To start</button>
             </div>
-            <div className={css.footer}>
-              <h3>Progress</h3>
-              <p>
-                Here you will see when and how much you read. To record, click
-                on the red button above.
-              </p>
-              <div className={css.star}>
-                <img src={star} alt="image of star" />
-              </div>
-            </div>
+            {/* <Progress /> */}
+            <Diary />
           </div>
           <div className={css.bottom}>
             <h2>My reading</h2>
@@ -59,9 +52,9 @@ const StatisticaPage: React.FC<StatisticaPageProps> = () => {
               </div>
               <button onClick={handleStart} className={css.start_btn}>
                 {start ? (
-                  <span className={css.start}></span>
-                ) : (
                   <span className={css.stop}></span>
+                ) : (
+                  <span className={css.start}></span>
                 )}
               </button>
             </div>
