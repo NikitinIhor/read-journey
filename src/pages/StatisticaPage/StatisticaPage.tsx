@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import clock from "../../assets/icons/clock.png";
+import menu from "../../assets/icons/menu.png";
 import Header from "../../components/Header/Header";
-// import Progress from "../../components/StatisticaPage/Progress/Progress";
 import Diary from "../../components/StatisticaPage/Diary/Diary";
+import Progress from "../../components/StatisticaPage/Progress/Progress";
 import { selectLibrary } from "../../redux/books/slice";
 import css from "./StatisticaPage.module.css";
 
@@ -12,9 +14,14 @@ interface StatisticaPageProps {}
 const StatisticaPage: React.FC<StatisticaPageProps> = () => {
   const { bookId } = useParams<{ bookId: string }>();
   const [start, setStart] = useState(false);
+  const [subMenu, setSubMenu] = useState(false);
 
   const handleStart = () => {
     setStart((prev) => !prev);
+  };
+
+  const handleSubMenu = () => {
+    setSubMenu((prev) => !prev);
   };
 
   const books = useSelector(selectLibrary);
@@ -37,10 +44,28 @@ const StatisticaPage: React.FC<StatisticaPageProps> = () => {
                 <p>Page number:</p>
                 <span>0</span>
               </div>
-              <button className={css.btn}>To start</button>
+              <button onClick={handleStart} className={css.btn}>
+                {start ? "To stop" : "To start"}
+              </button>
+
+              {start ? (
+                <div className={css.info}>
+                  <h2>Diary</h2>
+                  <div className={css.info_btns}>
+                    <button onClick={handleSubMenu}>
+                      <img src={clock} alt="image of clock" />
+                    </button>
+                    <button onClick={handleSubMenu}>
+                      <img src={menu} alt="image of menu" />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <Progress />
+              )}
             </div>
-            {/* <Progress /> */}
-            <Diary />
+
+            {start && <Diary />}
           </div>
           <div className={css.bottom}>
             <h2>My reading</h2>

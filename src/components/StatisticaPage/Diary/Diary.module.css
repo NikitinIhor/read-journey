@@ -1,0 +1,80 @@
+.list {
+  padding: calc(16 / 16 * 1rem);
+  background-color: #262626;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: calc(30 / 16 * 1rem);
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: calc(9 / 16 * 1rem);
+  margin-bottom: calc(17 / 16 * 1rem);
+}
+.icon {
+  position: relative;
+  width: calc(16 / 16 * 1rem);
+  height: calc(16 / 16 * 1rem);
+  border-radius: 4px;
+  background-color: white;
+  padding: calc(4 / 16 * 1rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon::after {
+  position: absolute;
+  content: "";
+  top: 16px;
+  left: 7px;
+  width: 2px;
+  height: 100px;
+  background-color: #1f1f1f;
+}
+.icon span {
+  width: calc(8 / 16 * 1rem);
+  height: calc(8 / 16 * 1rem);
+  border-radius: 2px;
+  background-color: #141414;
+}
+.data {
+  font-weight: 700;
+  font-size: calc(12 / 16 * 1rem);
+}
+.procent {
+  margin-bottom: calc(8 / 16 * 1rem);
+  padding-left: calc(25 / 16 * 1rem);
+}
+.time {
+  font-size: calc(10 / 16 * 1rem);
+  color: #686868;
+  padding-left: calc(25 / 16 * 1rem);
+}
+.pages {
+  font-size: calc(12 / 16 * 1rem);
+  color: #686868;
+  margin-bottom: calc(16 / 16 * 1rem);
+}
+.diargama {
+  display: flex;
+  align-items: start;
+  gap: calc(6 / 16 * 1rem);
+}
+.content {
+  width: calc(43 / 16 * 1rem);
+}
+.content img {
+  margin-bottom: calc(7 / 16 * 1rem);
+}
+.content p {
+  font-size: calc(10 / 16 * 1rem);
+  color: #686868;
+  text-align: center;
+}
