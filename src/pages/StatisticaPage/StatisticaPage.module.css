@@ -61,6 +61,13 @@
   color: #f9f9f9;
   margin-bottom: calc(40 / 16 * 1rem);
   letter-spacing: -2%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bottom span {
+  font-size: calc(12 / 16 * 1rem);
+  color: #686868;
 }
 .item {
   display: flex;
@@ -80,7 +87,8 @@
   text-align: center;
   line-height: 1.1;
   width: calc(152 / 16 * 1rem);
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   font-size: calc(14 / 16 * 1rem);
   margin-bottom: calc(8 / 16 * 1rem);
 }
@@ -125,10 +133,16 @@
   font-size: calc(18 / 16 * 1rem);
   font-weight: 700;
 }
-.info_btns {
+.info_imgs {
   display: flex;
   align-items: center;
   gap: calc(8 / 16 * 1rem);
+}
+.info_img {
+  opacity: 0.4;
+}
+.sub_text {
+  display: none;
 }
 @media (min-width: 768px) {
   .wrapper {
@@ -161,7 +175,6 @@
   }
   .bottom h2 {
     font-size: calc(28 / 16 * 1rem);
-    margin-bottom: calc(32 / 16 * 1rem);
     letter-spacing: 2%;
   }
   .item img {
@@ -170,8 +183,7 @@
     margin-bottom: calc(25 / 16 * 1rem);
   }
   .item h2 {
-    width: 100%;
-    margin: 0 auto;
+    width: max-content;
     font-size: calc(20 / 16 * 1rem);
   }
   .item p {
@@ -190,6 +202,21 @@
     width: calc(20 / 16 * 1rem);
     height: calc(20 / 16 * 1rem);
   }
+
+  .info h2 {
+    font-size: calc(20 / 16 * 1rem);
+  }
+  .info_imgs {
+    display: flex;
+    align-items: center;
+    gap: calc(8 / 16 * 1rem);
+  }
+  .info_img {
+    opacity: 0.4;
+  }
+  .bottom span {
+    font-size: calc(14 / 16 * 1rem);
+  }
 }
 @media (min-width: 1280px) {
   .wrapper {
@@ -197,16 +224,15 @@
     gap: calc(16 / 16 * 1rem);
   }
   .top {
+    padding: calc(20 / 16 * 1rem);
     flex-direction: column;
-    width: calc(353 / 16 * 1rem);
+    min-width: calc(353 / 16 * 1rem);
     justify-content: start;
   }
   .bottom {
     width: 100%;
   }
-  .bottom h2 {
-    margin-bottom: calc(44 / 16 * 1rem);
-  }
+
   .item img {
     width: calc(224 / 16 * 1rem);
     height: calc(340 / 16 * 1rem);
@@ -214,5 +240,14 @@
   }
   .item p {
     margin-bottom: calc(25 / 16 * 1rem);
+  }
+  .sub_text {
+    display: block;
+    width: calc(293 / 16 * 1rem);
+    font-size: calc(14 / 16 * 1rem);
+    color: #686868;
+    letter-spacing: -2%;
+    margin-bottom: calc(20 / 16 * 1rem);
+    line-height: 1.5;
   }
 }

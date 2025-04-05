@@ -6,6 +6,7 @@ import menu from "../../assets/icons/menu.png";
 import Header from "../../components/Header/Header";
 import Diary from "../../components/StatisticaPage/Diary/Diary";
 import Progress from "../../components/StatisticaPage/Progress/Progress";
+import Statistics from "../../components/StatisticaPage/Statistics/Statistics";
 import { selectLibrary } from "../../redux/books/slice";
 import css from "./StatisticaPage.module.css";
 
@@ -13,14 +14,16 @@ interface StatisticaPageProps {}
 
 const StatisticaPage: React.FC<StatisticaPageProps> = () => {
   const { bookId } = useParams<{ bookId: string }>();
+
+  const [firstShowProgress, setfirstShowProgress] = useState(false);
   const [start, setStart] = useState(false);
   const [subMenu, setSubMenu] = useState(false);
 
   const handleStart = () => {
+    if (!firstShowProgress) {
+      setfirstShowProgress(true);
+    }
     setStart((prev) => !prev);
-  };
-
-  const handleSubMenu = () => {
     setSubMenu((prev) => !prev);
   };
 
@@ -47,28 +50,39 @@ const StatisticaPage: React.FC<StatisticaPageProps> = () => {
               <button onClick={handleStart} className={css.btn}>
                 {start ? "To stop" : "To start"}
               </button>
-
-              {start ? (
+            </div>
+            <div>
+              {firstShowProgress && (
                 <div className={css.info}>
-                  <h2>Diary</h2>
-                  <div className={css.info_btns}>
-                    <button onClick={handleSubMenu}>
+                  {subMenu ? <h2>Diary</h2> : <h2>Statistics</h2>}
+
+                  <div className={css.info_imgs}>
+                    <div className={`${!subMenu ? css.info_img : ""}`}>
                       <img src={clock} alt="image of clock" />
-                    </button>
-                    <button onClick={handleSubMenu}>
+                    </div>
+                    <div className={`${subMenu ? css.info_img : ""}`}>
                       <img src={menu} alt="image of menu" />
-                    </button>
+                    </div>
                   </div>
                 </div>
-              ) : (
-                <Progress />
               )}
-            </div>
 
-            {start && <Diary />}
+              <p className={css.sub_text}>
+                Each page, each chapter is a new round of knowledge, a new step
+                towards understanding. By rewriting statistics, we create our
+                own reading history.
+              </p>
+
+              {!firstShowProgress && <Progress />}
+
+              {firstShowProgress && (start ? <Diary /> : <Statistics />)}
+            </div>
           </div>
           <div className={css.bottom}>
-            <h2>My reading</h2>
+            <h2>
+              My reading {!start && <span>6 hours and 23 minutes left</span>}
+            </h2>
+
             <div className={css.item}>
               <img src={selectedBook.imageUrl} alt={selectedBook.title} />
               <div className={css.content}>

@@ -6,12 +6,15 @@
   flex-direction: column;
   gap: calc(30 / 16 * 1rem);
 }
+.item:not(:first-child) .icon {
+  background-color: #686868;
+}
 .item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: calc(112 / 16 * 1rem);
 }
-
 .header {
   display: flex;
   align-items: center;
@@ -48,7 +51,11 @@
   font-weight: 700;
   font-size: calc(12 / 16 * 1rem);
 }
+.item:not(:first-child) .data {
+  color: #686868;
+}
 .procent {
+  font-size: calc(14 / 16 * 1rem);
   margin-bottom: calc(8 / 16 * 1rem);
   padding-left: calc(25 / 16 * 1rem);
 }
@@ -66,6 +73,7 @@
   display: flex;
   align-items: start;
   gap: calc(6 / 16 * 1rem);
+  font-size: calc(10 / 16 * 1rem);
 }
 .content {
   width: calc(43 / 16 * 1rem);
@@ -77,4 +85,57 @@
   font-size: calc(10 / 16 * 1rem);
   color: #686868;
   text-align: center;
+}
+.trash {
+  width: 14px;
+  height: 14px;
+}
+@media (min-width: 768px) {
+  .icon {
+    width: calc(20 / 16 * 1rem);
+    height: calc(20 / 16 * 1rem);
+  }
+  .icon span {
+    width: calc(12 / 16 * 1rem);
+    height: calc(12 / 16 * 1rem);
+  }
+  .icon::after {
+    top: 20px;
+    left: 9px;
+    height: 100px;
+  }
+  .data {
+    font-size: calc(16 / 16 * 1rem);
+  }
+  .procent {
+    font-size: calc(20 / 16 * 1rem);
+  }
+  .time {
+    font-size: calc(12 / 16 * 1rem);
+  }
+  .pages {
+    font-size: calc(14 / 16 * 1rem);
+    margin-bottom: calc(18 / 16 * 1rem);
+  }
+  .diargama {
+    font-size: calc(12 / 16 * 1rem);
+  }
+  .content {
+    width: calc(56 / 16 * 1rem);
+  }
+  .content img {
+    width: 60px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .list {
+    padding: calc(20 / 16 * 1rem);
+  }
+  .header {
+    margin-bottom: calc(29 / 16 * 1rem);
+  }
+  .right {
+    margin-left: calc(-20 / 16 * 1rem);
+  }
 }
