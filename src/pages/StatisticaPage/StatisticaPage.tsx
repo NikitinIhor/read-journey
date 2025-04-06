@@ -18,6 +18,7 @@ const StatisticaPage: React.FC<StatisticaPageProps> = () => {
   const [firstShowProgress, setfirstShowProgress] = useState(false);
   const [start, setStart] = useState(false);
   const [subMenu, setSubMenu] = useState(false);
+  const [pagesRead, setPagesRead] = useState(0);
 
   const handleStart = () => {
     if (!firstShowProgress) {
@@ -45,7 +46,7 @@ const StatisticaPage: React.FC<StatisticaPageProps> = () => {
               <h3>Start page:</h3>
               <div className={css.page}>
                 <p>Page number:</p>
-                <span>0</span>
+                <span>{pagesRead}</span>
               </div>
               <button onClick={handleStart} className={css.btn}>
                 {start ? "To stop" : "To start"}
@@ -75,7 +76,12 @@ const StatisticaPage: React.FC<StatisticaPageProps> = () => {
 
               {!firstShowProgress && <Progress />}
 
-              {firstShowProgress && (start ? <Diary /> : <Statistics />)}
+              {firstShowProgress &&
+                (start ? (
+                  <Diary />
+                ) : (
+                  <Statistics setPagesRead={setPagesRead} />
+                ))}
             </div>
           </div>
           <div className={css.bottom}>

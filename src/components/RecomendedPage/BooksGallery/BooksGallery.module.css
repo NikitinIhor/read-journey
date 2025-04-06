@@ -90,10 +90,13 @@
   background-color: rgba(20, 20, 20, 0.6);
   z-index: 10;
 }
+.recomended {
+  position: relative;
+}
 .modal {
   z-index: 11;
   position: absolute;
-  top: 70%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import css from "./Statistics.module.css";
 
-interface StatisticsProps {}
+interface StatisticsProps {
+  setPagesRead: (value: number) => void;
+}
 
-const Statistics: React.FC<StatisticsProps> = () => {
+const Statistics: React.FC<StatisticsProps> = ({ setPagesRead }) => {
+  useEffect(() => {
+    setPagesRead(171);
+  }, [setPagesRead]);
+
   return (
     <div className={css.container}>
       <div className={css.main}>

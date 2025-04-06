@@ -108,80 +108,86 @@ const BooksGallery: React.FC = () => {
   );
 
   return (
-    <div className={css.container}>
-      <div className={css.header}>
-        <h2 className={css.title}>Recommended</h2>
-        <div className={css.btns}>
-          <button
-            className={`${css.btn} ${index === 0 ? css.disabled : ""}`}
-            onClick={prevBook}
-            disabled={index === 0}
-          >
-            <IconContext.Provider value={{ size: "14px" }}>
-              <SlArrowLeft />
-            </IconContext.Provider>
-          </button>
-          <button
-            className={`${css.btn} ${
-              index >= books.length - 1 ? css.disabled : ""
-            }`}
-            onClick={nextBook}
-            disabled={index >= books.length - 1}
-          >
-            <IconContext.Provider value={{ size: "14px" }}>
-              <SlArrowRight />
-            </IconContext.Provider>
-          </button>
+    <div className={css.recomended}>
+      <div className={css.container}>
+        <div className={css.header}>
+          <h2 className={css.title}>Recommended</h2>
+          <div className={css.btns}>
+            <button
+              className={`${css.btn} ${index === 0 ? css.disabled : ""}`}
+              onClick={prevBook}
+              disabled={index === 0}
+            >
+              <IconContext.Provider value={{ size: "14px" }}>
+                <SlArrowLeft />
+              </IconContext.Provider>
+            </button>
+            <button
+              className={`${css.btn} ${
+                index >= books.length - 1 ? css.disabled : ""
+              }`}
+              onClick={nextBook}
+              disabled={index >= books.length - 1}
+            >
+              <IconContext.Provider value={{ size: "14px" }}>
+                <SlArrowRight />
+              </IconContext.Provider>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className={css.slider}>
-        <ul
-          className={css.list}
-          style={{ transform: `translateX(-${index * 160}px)` }}
-        >
-          {filteredBooks.length > 0 ? (
-            filteredBooks.map((book) => (
-              <li
-                className={css.item}
-                key={book._id}
-                onClick={() => toggleMenu(book)}
-              >
-                <img src={book.imageUrl} alt={book.title} />
-                <h2>{book.title}</h2>
-                <p>{book.author}</p>
-              </li>
-            ))
-          ) : (
-            <p>No books are matching your search</p>
-          )}
-        </ul>
-      </div>
+        <div className={css.slider}>
+          <ul
+            className={css.list}
+            style={{ transform: `translateX(-${index * 160}px)` }}
+          >
+            {filteredBooks.length > 0 ? (
+              filteredBooks.map((book) => (
+                <li
+                  className={css.item}
+                  key={book._id}
+                  onClick={() => toggleMenu(book)}
+                >
+                  <img src={book.imageUrl} alt={book.title} />
+                  <h2>{book.title}</h2>
+                  <p>{book.author}</p>
+                </li>
+              ))
+            ) : (
+              <p>No books are matching your search</p>
+            )}
+          </ul>
+        </div>
 
-      {menu && selectedBook && (
-        <>
-          <div className={css.overlay} onClick={toggleMenu}></div>
-          <div className={css.modal}>
-            <div className={css.body}>
-              <button onClick={toggleMenu} className={css.close} type="button">
-                <svg className={css.menu_close} width={28} height={28}>
-                  <use href={`${sprite}#icon-x`}></use>
-                </svg>
-              </button>
-              <div className={css.content}>
-                <img src={selectedBook.imageUrl} alt={selectedBook.title} />
-                <h2>{selectedBook.title}</h2>
-                <p className={css.author}>{selectedBook.author}</p>
-                <p
-                  className={css.total}
-                >{`${selectedBook.totalPages} pages`}</p>
-                <button onClick={handleAddBook}>Add to library</button>
+        {menu && selectedBook && (
+          <>
+            <div className={css.overlay} onClick={toggleMenu}></div>
+            <div className={css.modal}>
+              <div className={css.body}>
+                <button
+                  onClick={toggleMenu}
+                  className={css.close}
+                  type="button"
+                >
+                  <svg className={css.menu_close} width={28} height={28}>
+                    <use href={`${sprite}#icon-x`}></use>
+                  </svg>
+                </button>
+                <div className={css.content}>
+                  <img src={selectedBook.imageUrl} alt={selectedBook.title} />
+                  <h2>{selectedBook.title}</h2>
+                  <p className={css.author}>{selectedBook.author}</p>
+                  <p
+                    className={css.total}
+                  >{`${selectedBook.totalPages} pages`}</p>
+                  <button onClick={handleAddBook}>Add to library</button>
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
-      {subMenu && <GoodJob toggleSubMenu={toggleSubMenu} />}
+          </>
+        )}
+        {subMenu && <GoodJob toggleSubMenu={toggleSubMenu} />}
+      </div>
     </div>
   );
 };
